@@ -1,0 +1,4 @@
+#!/bin/bash
+
+LINK=$(gum input)
+herbstclient spawn mpv --ao=pulse --vo=gpu --autofit=30% $LINK

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+LINK=$(gum input --placeholder "Path")
+chezmoi add $LINK
+
+#testing

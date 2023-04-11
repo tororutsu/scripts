@@ -1,0 +1,68 @@
+#!/bin/env bash
+
+CWD="$HOME/myworld"
+
+if [[ -d "$CWD" ]]; then
+  echo "Way to go"
+  cd $CWD
+else
+  gum confirm "Would you like me to make that?"
+    if [[ $? -eq 0 ]]; then
+      cd $HOME
+      mkdir $CWD && cd $CWD
+    else
+      echo "Goodbye"
+      exit
+    fi
+fi
+
+echo "$(pwd)"
+
+motd() {
+  gum style \
+	--foreground 212 --border-foreground 212 --border double \
+	--align center --width 50 --margin "1 1" --padding "1 1" \
+	'Go-Me' 'Your "Space" in the terminal'
+}
+
+notes() {
+  local CWD="$HOME/myworld/notes"
+  if [[ -d "$CWD" ]]; then
+    echo "Notes exist"
+    cd $CWD
+  else
+    mkdir $CWD && cd $CWD
+    echo "Notes created"
+  fi
+}
+
+menu() {
+  gum style \
+	--foreground 212 --border-foreground 212 \
+	--align center --width 50 --margin "1 2" \
+  'q) Quit  n) Notes'
+
+  read -p "Enter choice : " CHOICE
+
+  case "$CHOICE" in
+    q)
+      if [ $CHOICE = "q" ]; 
+      then
+        exit
+      fi
+    ;;
+    n) 
+      notes
+    ;;
+    *) echo default
+    ;;
+  esac
+
+}
+
+while :
+do
+  motd
+  menu
+done
+

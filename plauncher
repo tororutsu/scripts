@@ -1,0 +1,4 @@
+#!/bin/bash
+
+APP=$(for bin in `echo $PATH|sed 's/:/\n/g'`; do ls $bin/;done | gum filter)
+herbstclient spawn $APP
